@@ -1,5 +1,0 @@
-debug=true
-oauth.appId=bob_brown007@hotmail.com
-oauth.appSecret=@*)#)@
-oauth.permissions=email,publish_stream
-jsonStoreEnabled=true
