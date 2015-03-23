@@ -36,7 +36,9 @@
 <!-- 								    </div> -->
 								    
 									<figcaption>
-										<H2>${perfil.nmUsuario} <SPAN>&nbsp;&nbsp;Top: ${indice.index + 1}º</SPAN></H2>
+										<H2>${perfil.nmUsuario} <br />
+											<SPAN>Top: ${indice.index + 1}º</SPAN>
+										</H2>
 										<P>
 											Idade: ${perfil.idade}<br />
 											Cidade: ${perfil.cidade}<br />
