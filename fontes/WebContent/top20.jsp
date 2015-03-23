@@ -21,32 +21,30 @@
 	<body>
 <!-- 		<div class="container">			 -->
 			<div id="grid-gallery" class="grid-gallery">
+				
 				<section class="grid-wrap">
-					<ul class="grid">
-						<li class="grid-sizer"></li><!-- for Masonry column width -->
-					
+					<ul class="grid">					
+						<li class="grid-sizer"></li> <!-- for Masonry column width -->					
 						<c:forEach var="perfil" items="${listaPerfil}" varStatus="indice">
-			  
-							<li>
-								<figure class="effect-lexi">									
-							   		<img src="data:image/png;base64,${perfil.byteArrayString}" name="bela${indice.index}"
-							   			id="img${indice.index}">
-<!-- 							   		<div style="font-size: 28px;">  -->
-<%-- 								    	<span class="foo label label-warning label-as-badge">${indice.index + 1}º</span> --%>
-<!-- 								    </div> -->
-								    
-									<figcaption>
-										<H2>${perfil.nmUsuario} <br />
-											<SPAN>Top: ${indice.index + 1}º</SPAN>
-										</H2>
-										<P>
-											Idade: ${perfil.idade}<br />
-											Cidade: ${perfil.cidade}<br />
-											Votos: ${perfil.qtVoto}<br />
-										</P>										
-									</figcaption>
-								</figure>
-							</li>
+
+								<li class="grid2">
+										<figure class="effect-lexi">									
+									   		<img src="data:image/png;base64,${perfil.byteArrayString}" name="bela${indice.index}"
+									   			id="img${indice.index}">
+											<figcaption>
+												<H2>${perfil.nmUsuario} <br />
+													<SPAN>Top: ${indice.index + 1}º</SPAN>
+												</H2>
+												<P>
+													Nome: ${perfil.nmUsuario}<br />
+													Idade: ${perfil.idade}<br />
+													Cidade: ${perfil.cidade}<br />
+													Votos: ${perfil.qtVoto}<br />
+												</P>										
+											</figcaption>
+										</figure>
+								</li>
+							
 						</c:forEach>											
 					</ul>
 				</section><!-- // grid-wrap -->
