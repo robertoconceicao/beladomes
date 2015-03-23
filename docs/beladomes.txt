@@ -1,0 +1,118 @@
+Bela do mês
+
+Objetivo
+
+Será um site onde as mulheres irão se cadastrar via facebook,
+e participarão de paredoes aleatórios, onde o internauta deverá
+votar na que julgar ser a mais bonita das duas.
+Não será limitado a quantidade de votos por internauta, porém como 
+a cada voto será mostrado um novo paredão, dificilmente será possível
+votar na mesma pessoa mais de uma vez.
+
+Será mostrado um rank das 50 mais bem votada, logo abaixo do paredão.
+
+A foto que estiver no perfil do facebook será a foto que aparecerá no paredão.
+A mais bem votada do mês terá uma página só pra ela, 
+onde poderá add suas melhores fotos e deixar todos de boca aberta, :-P.
+No final do ano será feito o paredão das vencedoras de todos os meses,
+a vencedora do ano vai ganhar uma geba. uahauhauh
+
+
+Como vai ficar estruturado o site
+
+A tela inicial será a tela de votação, onde ja vai mostrar o paredão e as 50 mais bem votadas.
+Nessa tela terá um botão participar do concurso.
+
+Tela de participação do concurso será mostrado a tela que pedirá o usuário e senha do facebook,
+após ela logar será mostrado uma mensagem de agradecimento e ela ja estará participando,
+e será mostrado a tela inicial de votação ja mostrando ela contra outra, pra ela ja 
+ganhar um votinho, auhauahuahau.
+
+
+O sistema todo será baseado em 3 tabelas.
+
+[Concurso] 1----->n [Voto] n <---------1 [Perfil]
+
+Tabela Concurso
+cdConcurso = Inteiro PK
+nmConcurso = Varchar(50)
+mesDoConcurso = [0,1,2, ...11 respectvamente janeiro, fevereiro, marco ... dezembro]
+ano = Integer
+situaçao = [1 - em andamento, 2 - finalizado]
+tipoConcurto = [1 - mensal, 2 - anual]
+
+
+Tabela Perfil (url, usuario, senha tudo pego do facebook)
+cdPerfil = Integer PK
+url = Varchar(250)
+usuario = Varchar (100) unique
+senha = Varchar (100)
+foto = Blob
+
+
+Tabela Voto
+cdConcurso = Integer FK
+cdPerfil = Integer FK
+qtVoto = Integer
+
+
+onde:
+
+O concurso será criado pelo admin, e la no paredao ja vai ser levado escondido o codigo do 
+concurso q esta rolando.
+Quando o usuario clicar num dos perfis, será pego o perfil dela q esta na tabela voto e incrementado a quantidade de 
+votos recebidos.
+
+
+Casos de Usos 
+
+UC_01 - Tela de Gerenciamento
+Usuario admin
+Gerenciar concurso: 
+Antes de começar a valer o concurso daquele mês o usuario admin terá que criar o concurso do mês.
+Deverá ser uma tela de grid simples onde será cadastrado os concursos
+só poderá ter um concurso em aberto, pois a votação só vai acontecer em cima do concurso aberto.
+
+Editar concurso:
+Serve para trocar o status do concurso para finalizado e com isso poder criar um novo.
+
+
+UC_02 - Votação
+
+Usuario Internauta
+Votar :
+Ao entrar na tela de votação será mostrado o paredão montado aleatoriamente:
+SQL para busca aleatorio do perfil:
+SELECT * FROM perfil ORDER BY RAND() LIMIT 1
+
+O sql deverá ser executado duas vezes para pegar dois perfil e montar a tela.
+Deverá ser verificado se os cdPerfil são diferentes senão deve executar o sql
+novamente. (nao faz sentido a mesma pessoa aparecer nas duas opçoes do paredão). 
+
+o usuario poderá escolher uma das duas para poder avançar para o proximo paredão,
+no botao de voto embaixo da foto de cada participante deve ser coloca o numero 1
+para a da esquerda e 2 para a da direita.
+Terá uma legenda dizendo q o usuario pode pressionar os numeros no teclado para votar
+ou clicar no botao.
+
+Nessa mesma tela será montado as TOPs 50.
+Utilizar esse SQL para montar a lista a cada refresh ou voto.
+SELECT p.* FROM Perfil p
+join Voto v on
+v.cdPerfil = p.cdPerfil
+and v.cdConcurso = ?
+ORDER BY v.qtVoto desc LIMIT 0,50
+
+
+
+UC_03 - Login e criação do perfil pelo facebook
+
+usuario boneca
+
+Ao entrar na tela de login a boneca preenche os dados de usuario e senha do facebook.
+O sistema se encarrega de fazer o login no facebook atraves da api facebook, para
+validar o usuario. Busca as informaçoes e faz o cadastro na tabela de perfil,
+detalhe o usuario é unique com isso nao conseguirá fazer dois perfil com o mesmo nome.
+
+Referencia: http://facebook4j.org/en/code-examples.html#oauth
+
