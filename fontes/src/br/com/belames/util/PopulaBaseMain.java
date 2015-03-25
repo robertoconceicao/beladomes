@@ -18,9 +18,10 @@ public class PopulaBaseMain {
 		BelamesDAO dao = new BelamesDAO();
 		List<Perfil> lista =  dao.findAllPerfil();
 		
+		System.out.println("########## Init ##########");
 		int j = 1;
 		for(int i=0; i<lista.size();i++){
-			if(j++ == 30){
+			if(j++ == 3){
 				j = 1;
 			} 
 			BufferedImage image = ImageIO.read(new File("C://bela-mes-fotos//foto"+j+".jpg"));			
@@ -32,9 +33,9 @@ public class PopulaBaseMain {
 			
 			dao.updateFotoPerfil(perfil);		
 			
-			System.out.println("foi");
+			System.out.println("go");
 		}
-
+		System.out.println("########## Over ##########");
 	}
 
 }
