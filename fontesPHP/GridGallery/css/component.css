@@ -1,0 +1,487 @@
+@font-face {
+	font-family: 'fontawesome';
+	src:url('../fonts/fontawesome/fontawesome.eot?-e43dk9');
+	src:url('../fonts/fontawesome/fontawesome.eot?#iefix-e43dk9') format('embedded-opentype'),
+		url('../fonts/fontawesome/fontawesome.woff?-e43dk9') format('woff'),
+		url('../fonts/fontawesome/fontawesome.ttf?-e43dk9') format('truetype'),
+		url('../fonts/fontawesome/fontawesome.svg?-e43dk9#fontawesome') format('svg');
+	font-weight: normal;
+	font-style: normal;
+} /* Made with http://icomoon.io/app */
+
+/* General style */
+.grid-gallery ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.grid-gallery figure {
+	margin: 0;
+}
+/*
+.grid-gallery figure img {
+	display: block;
+	width: 100%;	
+}
+
+.grid-gallery figure img {
+	display: block;
+	width: 100%;
+	line-height: 1.42857143;
+    background-color: #fff;
+  	border: 1px solid #ddd;
+  	border-radius: 4px;
+  	-webkit-transition: all .2s ease-in-out;
+          transition: all .2s ease-in-out;
+}
+*/
+
+.img-circle {
+  border-radius: 50%;
+}	
+
+
+.grid-gallery figcaption h3 {
+	margin: 0;
+	padding: 0 0 0.5em;
+}
+
+.grid-gallery figcaption p {
+	margin: 0;
+}
+
+/* Grid style*/ 
+.grid-wrap {
+	max-width: 69em;
+	margin: 0 auto;
+	padding: 5px;
+	/*padding: 0 1em 1.875em;*/	
+}
+
+.grid {
+	margin: 0 auto;
+}
+
+.grid li {
+	height: auto;
+	width: 20%;
+	float: left;
+	max-height: 420px; 
+	min-width: 320px; 
+	max-width: 460px;
+}
+
+.grid figure {
+	-webkit-transition: opacity 0.2s;
+	transition: opacity 0.2s;
+}
+
+.grid li:hover figure {
+	opacity: 0.7;
+}
+
+/*
+.grid figcaption {
+	background: #e4e4e4;
+	padding: 25px;
+}
+*/
+
+/*
+.grid figcaption {
+	background: #fff;
+	padding: 25px;
+	line-height: 1.42857143;
+  	border: 1px solid #ddd;
+  	border-radius: 4px;
+  	-webkit-transition: all .2s ease-in-out;
+          transition: all .2s ease-in-out;
+}
+*/
+
+/* Slideshow style */
+.slideshow {
+	position: fixed;
+	background: rgba(0,0,0,0.6);
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: 500;
+	opacity: 0;
+	visibility: hidden;
+	overflow: hidden;
+	-webkit-perspective: 1000px;
+	perspective: 1000px;
+	-webkit-transition: opacity 0.5s, visibility 0s 0.5s;
+	transition: opacity 0.5s, visibility 0s 0.5s;
+}
+
+.slideshow-open .slideshow {
+	opacity: 1;
+	visibility: visible;
+	-webkit-transition: opacity 0.5s;
+	transition: opacity 0.5s;
+}
+
+.slideshow ul {
+	width: 100%;
+	height: 100%;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	-webkit-transform: translate3d(0,0,150px);
+	transform: translate3d(0,0,150px);
+	-webkit-transition: -webkit-transform 0.5s;
+	transition: transform 0.5s;
+}
+
+.slideshow ul.animatable li {
+	-webkit-transition: -webkit-transform 0.5s;
+	transition: transform 0.5s;
+}
+
+.slideshow-open .slideshow ul {
+	-webkit-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
+}
+
+.slideshow li {
+	width: 660px;
+	height: 560px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -280px 0 0 -330px;
+	visibility: hidden;
+}
+
+.slideshow li.show {
+	visibility: visible;
+}
+
+.slideshow li:after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(255,255,255,0.8);
+	-webkit-transition: opacity 0.3s;
+	transition: opacity 0.3s;
+}
+
+.slideshow li.current:after {
+	visibility: hidden;
+	opacity: 0;
+	-webkit-transition: opacity 0.3s, visibility 0s 0.3s;
+	transition: opacity 0.3s, visibility 0s 0.3s;
+}
+
+.slideshow figure {
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	border: 50px solid #fff;
+	overflow: hidden;
+}
+
+.slideshow figcaption {
+	/*padding-bottom: 10px;*/
+}
+
+.slideshow figcaption h3 {
+	font-weight: 300;
+	font-size: 100%;
+}
+
+/* Navigation */
+.slideshow nav span {
+	position: fixed;
+	z-index: 1000;
+	color: #59656c;
+	text-align: center;
+	padding: 3%;
+	cursor: pointer;
+	font-size: 2.2em;
+}
+
+.slideshow nav span.nav-prev,
+.slideshow nav span.nav-next {
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.slideshow nav span.nav-next {
+	right: 0;
+}
+
+.slideshow nav span.nav-close {
+	top: 0;
+	right: 0;
+	padding: 0.5em 1em;
+	color: #31373a;
+}
+
+.icon:before,
+.icon:after {
+	font-family: 'fontawesome';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+span.nav-prev:before {
+	content: "\e601";
+}
+
+span.nav-next:before  {
+	content: "\e600";
+}
+
+span.nav-close:before {
+	content: "\e602";
+}
+
+/* Info on arrow key navigation */
+.info-keys {
+	position: fixed;
+	top: 10px;
+	left: 10px;
+	width: 60px;
+	font-size: 8px;
+	padding-top: 20px;
+	text-transform: uppercase;
+	color: #fff;
+	letter-spacing: 1px;
+	text-align: center;
+}
+
+.info-keys:before,
+.info-keys:after {
+	position: absolute;
+	top: 0;
+	width: 16px;
+	height: 16px;
+	border: 1px solid #fff;
+	text-align: center;
+	line-height: 14px;
+	font-size: 12px;
+}
+
+.info-keys:before {
+	left: 10px;
+	content: "\e603";
+}
+
+.info-keys:after {
+	right: 10px;
+	content: "\e604";
+}
+
+/* Example media queries (reduce number of columns and change slideshow layout) */
+
+@media screen and (max-width: 60em) {
+	/* responsive columns; see "Element sizing" on http://masonry.desandro.com/options.html */
+	.grid li {
+		width: 33.3%;		
+	}
+
+	.slideshow li {
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+		margin: 0;
+	}
+
+	.slideshow li figure img {
+		width: auto;
+		margin: 0 auto;
+		max-width: 100%;
+	}
+
+	.slideshow nav span,
+	.slideshow nav span.nav-close {
+		font-size: 1.8em;
+		padding: 0.3em;
+	}
+
+	.info-keys {
+		display: none;
+	}
+
+}
+
+@media screen and (max-width: 35em) {
+	.grid li {
+		width: 50%;
+	}
+}
+
+@media screen and (max-width: 24em) {
+	.grid li {
+		width: 100%;
+	}
+}
+
+
+
+/* css referente ao passar o mouse por cima da foto das top20 */
+
+.grid2 {
+	
+	list-style: none; 
+	margin: 0px auto; 
+/*	padding: 1em 0px 4em; */ 
+	text-align: center; 
+	clear: both;
+	position: relative; 
+	max-width: 1000px;
+}
+
+
+.grid2 figure {
+	/*background: rgb(48, 133, 163);*/
+	width: 20%;
+	height: auto; 
+	text-align: center; 
+	overflow: hidden;
+    position: relative;
+	cursor: pointer; 
+	float: left;
+	max-height: 420px; 
+	min-width: 320px; 
+	max-width: 460px;	
+	margin: 5px; 
+}
+
+.grid2 figure img {
+	display: block;
+	position: relative; 
+	min-height: 100%; 
+	max-width: 100%; 
+	opacity: 0.8;
+}
+
+.grid2 figure figcaption {
+	padding: 2em; color: rgb(255, 255, 255); text-transform: uppercase; font-size: 1.25em; backface-visibility: hidden; -webkit-backface-visibility: hidden;
+}
+.grid2 figure figcaption::before {
+	pointer-events: none;
+}
+.grid2 figure figcaption::after {
+	pointer-events: none;
+}
+.grid2 figure figcaption {
+	left: 0px; top: 0px; width: 100%; height: 100%; position: absolute;
+}
+.grid2 figure figcaption > a {
+	left: 0px; top: 0px; width: 100%; height: 100%; position: absolute;
+}
+.grid2 figure figcaption > a {
+	text-indent: 200%; font-size: 0px; white-space: nowrap; z-index: 1000; opacity: 0;
+}
+.grid2 figure h2 {
+	font-weight: 300; word-spacing: -0.15em;
+}
+.grid2 figure h2 span {
+	font-weight: 800;
+}
+.grid2 figure h2 {
+	margin: 0px;
+}
+.grid2 figure p {
+	margin: 0px;
+}
+.grid2 figure p {
+	letter-spacing: 1px; font-size: 68.5%;
+}
+figure.effect-lexi {	
+	background: linear-gradient(-45deg, rgb(0, 0, 0) 0%, rgb(255, 255, 255) 100%);
+}
+
+figure.effect-lexi img {
+	margin: -10px 0px 0px -10px; 
+	transition:opacity 0.35s, transform 0.35s;
+	
+	width: calc(100% + 10px);
+	 
+	max-width: none; 
+	opacity: 0.9; 
+	transform: translate3d(10px, 10px, 0px); 
+	backface-visibility: hidden; 
+	-webkit-backface-visibility: hidden; 
+	-webkit-transition: opacity 0.35s, -webkit-transform 0.35s; 
+	-webkit-transform: translate3d(10px, 10px, 0);
+}
+figure.effect-lexi figcaption::before {
+	transition:opacity 0.35s, transform 0.35s; -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+}
+figure.effect-lexi p {
+	transition:opacity 0.35s, transform 0.35s; -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+}
+
+figure.effect-lexi figcaption::before {
+	transform-origin: 50% 50%; 
+	border-radius: 50%; 
+	border: 2px solid rgb(255, 255, 255); 
+	border-image: none; 
+	width: 300px; 
+	height: 300px; 
+	right: -100px; 
+	bottom: -100px; 
+	position: absolute; 
+	content: ""; 
+	opacity: 0; 
+	box-shadow: 0px 0px 0px 900px rgba(255,255,255,0.2); 
+	transform: scale3d(0.5, 0.5, 1); 
+	-webkit-transform: scale3d(0.5, 0.5, 1); 
+	-webkit-transform-origin: 50% 50%;
+}
+
+/*
+figure.effect-lexi:hover img {
+	opacity: 0.6; transform: translate3d(0px, 0px, 0px); -webkit-transform: translate3d(0, 0, 0);
+}
+*/
+figure.effect-lexi h2 {
+	transition:transform 0.35s; text-align: left; transform: translate3d(5px, 5px, 0px); -webkit-transition: -webkit-transform 0.35s; -webkit-transform: translate3d(5px, 5px, 0);
+}
+figure.effect-lexi p {
+	padding: 0px 1.5em 1.5em 0px; width: 140px; text-align: right; right: 0px; bottom: 0px; position: absolute; 
+	opacity: 0; transform: translate3d(20px, 20px, 0px); -webkit-transform: translate3d(20px, 20px, 0);
+}
+figure.effect-lexi:hover figcaption::before {
+	opacity: 1; transform: scale3d(1, 1, 1); -webkit-transform: scale3d(1, 1, 1);
+}
+figure.effect-lexi:hover h2 {
+	opacity: 1; transform: translate3d(0px, 0px, 0px); -webkit-transform: translate3d(0, 0, 0);
+}
+
+figure.effect-lexi:hover p {
+	opacity: 1; transform: translate3d(0px, 0px, 0px); -webkit-transform: translate3d(0, 0, 0);
+}
+
+
+@media screen and (max-width:50em) {
+	.content {
+		padding: 0px 10px; text-align: center;
+	}
+	
+	.grid2 figure {
+		margin: 10px auto;
+		width: 100%; 
+		float: none; 
+		display: inline-block;		
+	}
+}
+/*
+*/
