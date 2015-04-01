@@ -3,7 +3,21 @@
 	include_once 'src/db.php';
 	
 	//isset($_GET["page"]) ? intval($_GET['page']) : 1;
-	$cdPerfil = isset($_POST['cdPerfil']) ? intval($_POST['cdPerfil']) : 0;
+	$nuBotao = isset($_POST['nuBotao']) ? intval($_POST['nuBotao']) : 1;
+	
+	/*
+	 * Foi feito por sessao para evitar que algum espertinho troque o valor do cdPerfil 
+	 * via console do browser e sair votando sempre na mesma boneca.
+	 * Desse jeito q estamos fazendo isso não será possível pq ele nao tem acesso aos
+	 * objetos da sessão, então se ele trocar la na tela o cdPerfil nao vai adiantar de 
+	 * nada o voto vai ser pra mina q esta realmente no paredao, chupa .|.
+	 */
+	$cdPerfil = $cdPerfil = $_SESSION['perfil1']->cdPerfil;
+	// Se foi o botao 2 pega o perfil2 da sessao
+	if($nuBotao == 2){
+		$cdPerfil = $_SESSION['perfil2']->cdPerfil;		
+	} 
+	
 	$cdConcurso = 1; //TODO pegar da base cdConcurso
 	$result = array();
 	

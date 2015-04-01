@@ -20,14 +20,22 @@
 
 </head>
 <body>
-
-	<?php 
+	<?php
 		require_once 'src/db.php'; // The mysql database connection script
+	    session_start();
+	 
 		$query=mysql_query(" SELECT cdPerfil, nmUsuario, urlPerfil, urlFoto, cidade, idade, genero, foto FROM perfil ORDER BY RAND() LIMIT 2 ") or die(mysql_error());
 		
 		# retorna as duas participantes do paredao
 		$perfil1 = mysql_fetch_object($query); //mysql_fetch_array($query);
-		$perfil2 = mysql_fetch_object($query);		
+		$perfil2 = mysql_fetch_object($query);
+
+		$_SESSION['perfil1'] = $perfil1;
+		$_SESSION['perfil2'] = $perfil2;
+		
+	
+		echo "Perfil1: {$_SESSION['perfil1']->cdPerfil} <br />";
+		echo "Perfil2: {$_SESSION['perfil2']->cdPerfil} <br />";
 	?>
 
 	<div class="col-sm-2"></div>
@@ -43,7 +51,7 @@
 					<input type="hidden" size="0" name="cdPerfil1" id="cdPerfil1" value="<?php echo $perfil1->cdPerfil;?>">
 		        <p>
 		        	<input type="button" class="btn btn-primary" name="cdPerfil1" 
-		        		value="Votar" onclick="votar('<?php echo $perfil1->cdPerfil;?>');"> 
+		        		value="Votar" onclick="votar(1);"> 
 		        </p> 
 		        
 		      </div>
@@ -61,7 +69,7 @@
 					<input type="hidden" size="0" name="cdPerfil2" id="cdPerfil2" value="<?php echo $perfil2->cdPerfil;?>">
 		        <p>
 		        	<input type="button" class="btn btn-primary" name="cdPerfil2" 
-		        		value="Votar" onclick="votar('<?php echo $perfil2->cdPerfil;?>');"> 
+		        		value="Votar" onclick="votar(2);"> 
 		        </p>		        
 		      </div>
 		    </div>

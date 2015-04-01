@@ -64,7 +64,11 @@
 
 <div class="bs-docs-header" id="content" tabindex="-1" align="center">
       <div class="container" align="center">
-    	<img src="bela-mes-fotos/concursoLogo.png" style="height: auto; width:600px; height:200px;" align="top">
+      	<h1>[... Banner ou logo oficial ...]</h1>
+      	<!--
+      		por enquanto vai ficar comentado ateh encontrar um banner oficial 
+	    	<img src="bela-mes-fotos/concursoLogo.png" style="height: auto; width:600px; height:200px;" align="top">
+      	 -->
       </div>
 </div>
 
@@ -108,9 +112,9 @@
 
 	*/
     //Metodo Ajax para votar e depois do voto chama o montarParedao
-	function votar(cdPerfil) {
+	function votar(nuBotao) {
 		jQuery.post("votar.php", 
-			{cdPerfil: cdPerfil},
+			{nuBotao: nuBotao},
 			function (data){
 				location.reload();				
 				//montarParedao();			
