@@ -1,6 +1,6 @@
 <?php
-
 	include_once 'src/db.php';
+	session_start();
 	
 	//isset($_GET["page"]) ? intval($_GET['page']) : 1;
 	$nuBotao = isset($_POST['nuBotao']) ? intval($_POST['nuBotao']) : 1;
@@ -12,7 +12,7 @@
 	 * objetos da sessão, então se ele trocar la na tela o cdPerfil nao vai adiantar de 
 	 * nada o voto vai ser pra mina q esta realmente no paredao, chupa .|.
 	 */
-	$cdPerfil = $cdPerfil = $_SESSION['perfil1']->cdPerfil;
+	$cdPerfil = $_SESSION['perfil1']->cdPerfil;
 	// Se foi o botao 2 pega o perfil2 da sessao
 	if($nuBotao == 2){
 		$cdPerfil = $_SESSION['perfil2']->cdPerfil;		
@@ -40,7 +40,10 @@
 	}
 	
 	mysql_query($query) or die(mysql_error());
+			
+	include_once 'buscaPerfilParedao.php';
 	
-	array_push($result, array("success" => true));	
+	$result = array("foto1" => "".base64_encode($_SESSION['perfil1']->foto.""),	"foto2" => "".base64_encode($_SESSION['perfil2']->foto)."");
+	
 	echo json_encode($result);	
 ?>

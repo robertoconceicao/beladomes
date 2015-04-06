@@ -72,12 +72,15 @@
       </div>
 </div>
 
+
+<div id="debugger"></div>
+
 <div>	
 	<div class="container" >
 	
 		<br><br>
 		<div id="paredao">
-			<?php include 'paredao.php';?>
+			<!-- essa div é carregada pelo metodo monstarParedao -->			
 		</div>
     </div>
 </div>
@@ -85,39 +88,36 @@
 <div>
 	<h1>Top 20!</h1>	
 	<div id="top20">
-		<?php include 'top20.php';?>
+		<!-- essa div é carregada pelo metodo monstarTop20 -->
 	</div>	
 </div>
 
 <script>
-/*
-    jQuery(function(){
+    jQuery(document).ready(function(){
       	montarParedao();
 	    montarTop20();
     });
 
     //Metodo Ajax para montar o paredao
 	function montarParedao(){
-		jQuery.get("./paredao", function (data){				
-			jQuery("#paredao").html(data);			
-		});
+		jQuery("#paredao").load('paredao.php');	
 	}
 	    
     //Metodo Ajax para montar a lista das tops
 	function montarTop20(){
-		jQuery.get("./top20", function (data){				
-			jQuery("#top20").html(data);			
-		});		
+		jQuery("#top20").load('top20.php');
 	}
 
-	*/
-    //Metodo Ajax para votar e depois do voto chama o montarParedao
+
+    //Metodo Ajax para votar e depois do voto chama o montarParedao  
 	function votar(nuBotao) {
 		jQuery.post("votar.php", 
 			{nuBotao: nuBotao},
-			function (data){
-				location.reload();				
-				//montarParedao();			
+			function (data){				
+			   //var dados = jQuery.parseJSON(data);
+			   //var dados = JSON.stringify(data);
+			   //jQuery("#debugger").html(dados);
+			   montarParedao();				
 		});
 	}
   </script>	
