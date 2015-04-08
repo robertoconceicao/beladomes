@@ -40,10 +40,8 @@
 	}
 	
 	mysql_query($query) or die(mysql_error());
-			
-	include_once 'buscaPerfilParedao.php';
 	
-	$result = array("foto1" => "".base64_encode($_SESSION['perfil1']->foto.""),	"foto2" => "".base64_encode($_SESSION['perfil2']->foto)."");
+	$result = array("success" => true);
 	
 	echo json_encode($result);	
 ?>

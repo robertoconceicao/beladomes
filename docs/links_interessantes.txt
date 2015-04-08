@@ -1,2 +1,8 @@
 Visualizador de imagem animal
 http://tympanus.net/codrops/2013/01/17/putting-css-clip-to-work-expanding-overlay-effect/
+
+
+Login Facebook com o PHP ou JS
+http://imasters.com.br/linguagens/php/login-com-facebook-em-seu-site-sdk-php/
+http://www.krizna.com/general/login-with-facebook-using-php/
+https://www.sammyk.me/best-practice-for-facebook-login-with-the-javascript-sdk-and-php-sdk-v4-1

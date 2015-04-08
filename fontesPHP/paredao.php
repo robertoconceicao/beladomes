@@ -23,10 +23,7 @@
 	$perfil2 = mysql_fetch_object($query);
 	
 	$_SESSION['perfil1'] = $perfil1;
-	$_SESSION['perfil2'] = $perfil2;
-	
-	echo "[DEBUG] - Perfil1: {$_SESSION['perfil1']->cdPerfil} <br />";
-	echo "[DEBUG] - Perfil2: {$_SESSION['perfil2']->cdPerfil} <br />";
+	$_SESSION['perfil2'] = $perfil2;	
 ?>
 
 <div class="col-sm-2"></div>
