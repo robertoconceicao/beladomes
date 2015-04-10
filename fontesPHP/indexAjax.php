@@ -72,6 +72,9 @@
       </div>
 </div>
 
+<?php 
+	include_once 'addConcursoSessao.php';
+?>
 
 <div id="debugger"></div>
 
@@ -108,15 +111,11 @@
 		jQuery("#top20").load('top20.php');
 	}
 
-
     //Metodo Ajax para votar e depois do voto chama o montarParedao  
 	function votar(nuBotao) {
 		jQuery.post("votar.php", 
 			{nuBotao: nuBotao},
-			function (data){				
-			   //var dados = jQuery.parseJSON(data);
-			   //var dados = JSON.stringify(data);
-			   //jQuery("#debugger").html(dados);
+			function (data){
 			   montarParedao();				
 		});
 	}

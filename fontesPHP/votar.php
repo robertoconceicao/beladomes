@@ -5,6 +5,8 @@
 	//isset($_GET["page"]) ? intval($_GET['page']) : 1;
 	$nuBotao = isset($_POST['nuBotao']) ? intval($_POST['nuBotao']) : 1;
 	
+	$cdConcurso = $_SESSION['cdConcurso'];
+	
 	/*
 	 * Foi feito por sessao para evitar que algum espertinho troque o valor do cdPerfil 
 	 * via console do browser e sair votando sempre na mesma boneca.
@@ -16,9 +18,8 @@
 	// Se foi o botao 2 pega o perfil2 da sessao
 	if($nuBotao == 2){
 		$cdPerfil = $_SESSION['perfil2']->cdPerfil;		
-	} 
+	}
 	
-	$cdConcurso = 1; //TODO pegar da base cdConcurso
 	$result = array();
 	
 	$buscaVotos=mysql_query(" SELECT qtvoto 

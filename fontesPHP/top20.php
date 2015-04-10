@@ -17,9 +17,11 @@
 		<section class="grid-wrap">
 			<ul class="grid">					
 				<li class="grid-sizer"></li> <!-- for Masonry column width -->
-			<?php
-				// TODO buscar cdConcurso da base
+			<?php				
 				require_once 'src/db.php';
+				session_start();
+				
+				$cdConcurso = $_SESSION['cdConcurso'];
 				
 				$query=mysql_query("SELECT
 					p.cdPerfil, 
@@ -34,7 +36,7 @@
 					FROM Perfil p
 					join Voto v on
 					v.cdPerfil = p.cdPerfil
-					and v.cdConcurso = 1
+					and v.cdConcurso = $cdConcurso
 					ORDER BY v.qtVoto desc LIMIT 0,20							
 				") or die(mysql_error());
 
