@@ -33,8 +33,8 @@
 					p.genero, 			
 					p.foto, 	
 					v.qtVoto 	
-					FROM Perfil p
-					join Voto v on
+					FROM perfil p
+					join voto v on
 					v.cdPerfil = p.cdPerfil
 					and v.cdConcurso = $cdConcurso
 					ORDER BY v.qtVoto desc LIMIT 0,20							
