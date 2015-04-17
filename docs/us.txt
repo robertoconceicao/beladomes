@@ -1,21 +1,22 @@
-debug=true
-oauth.appId=1404595923181238
+doauth.appId=1404595923181238
 oauth.appSecret=f118c7ef6a92cee9016b28ce93bfc02a
 oauth.permissions=public_profile,email,publish_stream
 jsonStoreEnabled=true
 
-
+######## Banco ###############
 banco=u749850328_bela
 user=u749850328_bob
-senha do banco=A1im0k8Kll
+senha=A1im0k8Kll
+
 
 url=beladomes.zz.mu
 
-
+######## FTP #################
 FTP ftp://beladomes.zz.mu/  ou 185.28.21.57
 user=u749850328
 senha ftp=R55R8xdkwC
 
-usuario e senha hostinger
-conceicao.roberto@gmail.com
-yVuzud
+######## LOGIN PAINEL HOSTINGER ###############
+usuario=conceicao.roberto@gmail.com
+senha=yVuzud
+
