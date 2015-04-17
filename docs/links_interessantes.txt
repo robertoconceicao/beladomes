@@ -6,3 +6,4 @@ Login Facebook com o PHP ou JS
 http://imasters.com.br/linguagens/php/login-com-facebook-em-seu-site-sdk-php/
 http://www.krizna.com/general/login-with-facebook-using-php/
 https://www.sammyk.me/best-practice-for-facebook-login-with-the-javascript-sdk-and-php-sdk-v4-1
+http://mattheuspirovani.blogspot.com.br/2014/05/facebook-php-sdk-4-exemplo-completo.html

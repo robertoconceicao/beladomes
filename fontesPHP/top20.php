@@ -23,7 +23,8 @@
 				
 				$cdConcurso = $_SESSION['cdConcurso'];
 				
-				$query=mysql_query("SELECT
+				$query=mysqli_query($connection,
+                    "SELECT
 					p.cdPerfil, 
 					p.nmUsuario, 
 					p.urlPerfil, 
@@ -38,10 +39,10 @@
 					v.cdPerfil = p.cdPerfil
 					and v.cdConcurso = $cdConcurso
 					ORDER BY v.qtVoto desc LIMIT 0,20							
-				") or die(mysql_error());
+				") or die(mysqli_error($connection));
 
 				$arr = array();
-				while($obj = mysql_fetch_object($query)) {								
+				while($obj = mysqli_fetch_object($query)) {
 				    array_push($arr, $obj);
 				}
 

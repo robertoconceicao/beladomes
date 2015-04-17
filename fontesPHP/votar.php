@@ -22,12 +22,13 @@
 	
 	$result = array();
 	
-	$buscaVotos=mysql_query(" SELECT qtvoto 
+	$buscaVotos=mysqli_query($connection,
+                             " SELECT qtvoto
 							FROM voto 
 							where cdConcurso = $cdConcurso 
-							and cdPerfil = $cdPerfil ");
+							and cdPerfil = $cdPerfil ") or die(mysqli_error($connection));
 	
-	$obj = mysql_fetch_object($buscaVotos);		
+	$obj = mysqli_fetch_object($buscaVotos);
 
 	$qtVoto = isset($obj) ? $obj->qtvoto : 0;
 	
@@ -40,7 +41,7 @@
 		$query = "UPDATE voto SET qtvoto = $qtVoto WHERE cdConcurso = $cdConcurso and cdPerfil = $cdPerfil";
 	}
 	
-	mysql_query($query) or die(mysql_error());
+	mysqli_query($connection, $query) or die(mysqli_error($connection));
 	
 	$result = array("success" => true);
 	

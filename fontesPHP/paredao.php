@@ -16,11 +16,11 @@
 	include_once 'src/db.php';
 	session_start();
 	
-	$query=mysql_query(" SELECT cdPerfil, nmUsuario, urlPerfil, urlFoto, cidade, idade, genero, foto FROM perfil ORDER BY RAND() LIMIT 2 ") or die(mysql_error());
+	$query=mysqli_query($connection, " SELECT cdPerfil, nmUsuario, urlPerfil, urlFoto, cidade, idade, genero, foto FROM perfil ORDER BY RAND() LIMIT 2 ") or die(mysqli_error($connection));
 					
 	# retorna as duas participantes do paredao
-	$perfil1 = mysql_fetch_object($query); //mysql_fetch_array($query);
-	$perfil2 = mysql_fetch_object($query);
+	$perfil1 = mysqli_fetch_object($query); //mysql_fetch_array($query);
+	$perfil2 = mysqli_fetch_object($query);
 	
 	$_SESSION['perfil1'] = $perfil1;
 	$_SESSION['perfil2'] = $perfil2;	

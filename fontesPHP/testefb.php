@@ -6,100 +6,129 @@
 <meta charset="UTF-8">
 </head>
 <body>
-<!--
-<script>
-  // This is called with the results from from FB.getLoginStatus().
-  function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
-    if (response.status === 'connected') {
-      // Logged into your app and Facebook.
-      testAPI();
-    } else if (response.status === 'not_authorized') {
-      // The person is logged into Facebook, but not your app.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
-    } else {
-      // The person is not logged into Facebook, so we're not sure if
-      // they are logged into this app or not.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into Facebook.';
+
+<?php
+/*
+session_start();
+
+if($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['code'])){
+// Informe o seu App ID abaixo
+  $appId = '1404595923181238';
+  // Digite o App Secret do seu aplicativo abaixo:
+  $appSecret = 'be3dd13e6b514f3508936830ae925da3';
+  // Url informada no campo "Site URL"
+  $redirectUri = urlencode('http://beladomes.zz.mu/testefb.php');
+  // Obtém o código da query string
+  $code = $_GET['code'];
+
+  // Monta a url para obter o token de acesso e assim obter os dados do usuário
+  $token_url = "https://graph.facebook.com/oauth/access_token?client_id=$appId&redirect_uri=$redirectUri&client_secret=$appSecret&code=$code";
+  //pega os dados
+  $response = @file_get_contents($token_url);
+  if($response){
+    $params = null;
+    parse_str($response, $params);
+    if(isset($params['access_token']) && $params['access_token']){
+      $graph_url = "https://graph.facebook.com/me?access_token=". $params['access_token'];
+      $user = json_decode(file_get_contents($graph_url));
+ 
+    // nesse IF verificamos se veio os dados corretamente
+      if(isset($user->email) && $user->email){
+  
+    *Apartir daqui, você já tem acesso aos dados usuario, podendo armazená-los
+    *em sessão, cookie ou já pode inserir em seu banco de dados para efetuar
+    *autenticação.
+    *No meu caso, solicitei todos os dados abaixo e guardei em sessões.
+  
+        $_SESSION['email'] = $user->email;
+        $_SESSION['nome'] = $user->name;
+        $_SESSION['localizacao'] = $user->location->name;
+        $_SESSION['uid_facebook'] = $user->id;
+        $_SESSION['user_facebook'] = $user->username;
+        $_SESSION['link_facebook'] = $user->link;
+      }
+	  
+	  echo "<br><br><pre>";
+		print_r($user);
+	  echo "</pre>";
+    }else{
+      echo "Erro de do token";
+      exit(0);
     }
+  }else{
+    echo "Erro de conexão com Facebook: $token_url";
+    exit(0);
   }
+}else if($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['error'])){
+  echo 'Permissão não concedida';
+}
+<a href="https://www.facebook.com/dialog/oauth?client_id=1404595923181238&redirect_uri=http://beladomes.zz.mu/testefb.php&scope=email,user_website,user_location">Entrar com Facebook</a>
+*/
 
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
+//define('FACEBOOK_SDK_V4_SRC_DIR', '/facebook-php-sdk-v4-4.0-dev/src/Facebook/');
+//require __DIR__ . '/facebook-php-sdk-v4-4.0-dev/autoload.php';
+session_start();
+require ('facebook-php-sdk-v4-4.0-dev/autoload.php');
 
-  window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '{1404595923181238}',
-    cookie     : true,  // enable cookies to allow the server to access 
-                        // the session
-    xfbml      : true,  // parse social plugins on this page
-    version    : 'v2.1' // use version 2.1
-  });
+use Facebook\FacebookSession;
+use Facebook\FacebookRequest;
+use Facebook\GraphUser;
+use Facebook\FacebookRequestException;
+use Facebook\FacebookRedirectLoginHelper;
 
-  // Now that we've initialized the JavaScript SDK, we call 
-  // FB.getLoginStatus().  This function gets the state of the
-  // person visiting this page and can return one of three states to
-  // the callback you provide.  They can be:
-  //
-  // 1. Logged into your app ('connected')
-  // 2. Logged into Facebook, but not your app ('not_authorized')
-  // 3. Not logged into Facebook and can't tell if they are logged into
-  //    your app or not.
-  //
-  // These three cases are handled in the callback function.
+// Informe o seu App ID abaixo
+$appId = '1404595923181238';
+  // Digite o App Secret do seu aplicativo abaixo:
+$appSecret = 'be3dd13e6b514f3508936830ae925da3';
+// Url informada no campo "Site URL"
+$redirect_url = 'http://beladomes.zz.mu/testefb.php';  
 
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
+FacebookSession::setDefaultApplication($appId, $appSecret);
 
-  };
+$helper = new FacebookRedirectLoginHelper($redirect_url, $appId, $appSecret);
 
-  // Load the SDK asynchronously
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
+try {
+    $session = $helper->getSessionFromRedirect();
+	
+	if($session) {
+		$_SESSION['token'] = $session->getToken();
+		
+		$fb_session = new FacebookSession($session->getToken());
+				
+		$me = (new FacebookRequest(
+          $fb_session, 'GET', '/me'
+        ))->execute()->getGraphObject(GraphUser::className());
+ 
+        echo 'Olá ' . $me->getName();
+        
+/*		
+        $paginas = (new FacebookRequest(
+          $fb_session, 'GET', '/me/accounts'
+        ))->execute()->getGraphObject();
+         
+        $paginas = $paginas->getPropertyAsArray('data');
+         
+        echo '';
+         
+        $sel = '<select><option></option>';
+         
+        foreach ( $paginas as $pagina ){             
+            $sel .= '<option>' . $pagina->getProperty('name') . '</option>';             
+        }
+         
+        echo $sel . '</select>' ;
+		*/
+	} else {
+		echo '<a href="' . $helper->getLoginUrl() . '">Login with Facebook</a>';
+	}
+} catch(FacebookRequestException $ex) {
+    echo "Ocorreu uma exceção, código: " . $ex->getCode();
+    echo " com a mensagem: " . $ex->getMessage();
+} catch(\Exception $ex) {
+    echo 'Ocorreu um erro interno.' . $ex->getTraceAsString();
+}
 
-  // Here we run a very simple test of the Graph API after login is
-  // successful.  See statusChangeCallback() for when this call is made.
-  function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-      console.log('Successful login for: ' + response.name);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
-    });
-  }
-</script>
-
-  Below we include the Login Button social plugin. This button uses
-  the JavaScript SDK to present a graphical Login button that triggers
-  the FB.login() function when clicked.
-
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
-
-<div id="status">
-</div>
--->
-
-<a href="https://www.facebook.com/dialog/oauth?client_id=1404595923181238&redirect_uri=&scope=public_profile,email,publish_stream">Entrar com Facebook</a>
+?>
 
 </body>
 </html>
